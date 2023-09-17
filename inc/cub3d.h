@@ -6,7 +6,7 @@
 /*   By: ayakoubi <ayakoubi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 08:30:09 by ylabrahm          #+#    #+#             */
-/*   Updated: 2023/09/17 10:20:47 by ayakoubi         ###   ########.fr       */
+/*   Updated: 2023/09/17 11:37:47 by ayakoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,27 @@
 
 typedef enum e_dir
 {
-    NORTH = 270,
-    SOUTH = 90,
-    WEST = 180,
-    EAST = 0
+	NORTH = 270,
+	SOUTH = 90,
+	WEST = 180,
+	EAST = 0
 } t_dir;
 
 typedef struct s_corMap
 {
-    int x;
-    int y;
-    t_dir dir;
+	int x;
+	int y;
+	t_dir dir;
 } t_corMap;
 
 typedef struct s_data_maps
 {
-    char *textures[4];
-    int F[3];
-    int C[3];
-    char **map;
-    t_corMap *posplayer;
+	char *textures[4];
+	int F[3];
+	int C[3];
+	char **map;
+	t_corMap *posplayer;
+	int count;
 } t_data_maps;
 
 typedef struct s_listMap
@@ -64,45 +65,45 @@ typedef struct s_listMap
 
 typedef struct player_s
 {
-    double x;
-    double y;
-    int move_speed;
-    float rotation_speed;
-    float rotation_angle;
+	double x;
+	double y;
+	int move_speed;
+	float rotation_speed;
+	float rotation_angle;
 } player_t;
 
 typedef struct data_s
 {
-    mlx_t *mlx;
-    player_t player;
-    mlx_image_t *minimap;
-    mlx_image_t *game;
-    char **map_grid;
-    int columns;
-    int rows;
-    int grid_size;
-    int map_height;
-    int map_width;
-    float fov_angle;
-    mlx_texture_t *texture_1;
-    mlx_texture_t *texture_2;
-    mlx_texture_t *texture_3;
-    mlx_texture_t *texture_4;
-    mlx_texture_t *texture;
+	mlx_t *mlx;
+	player_t player;
+	mlx_image_t *minimap;
+	mlx_image_t *game;
+	char **map_grid;
+	int columns;
+	int rows;
+	int grid_size;
+	int map_height;
+	int map_width;
+	float fov_angle;
+	mlx_texture_t *texture_1;
+	mlx_texture_t *texture_2;
+	mlx_texture_t *texture_3;
+	mlx_texture_t *texture_4;
+	mlx_texture_t *texture;
 } data_t;
 
 typedef struct vect_s
 {
-    double x;
-    double y;
+	double x;
+	double y;
 } vect_t;
 
 typedef struct hitRay_s
 {
-    double distance;
-    int is_horizontal;
-    double x_hit;
-    double y_hit;
+	double distance;
+	int is_horizontal;
+	double x_hit;
+	double y_hit;
 	int is_facing_down, is_facing_up, is_facing_right, is_facing_left;
 } hitRay_t;
 
@@ -128,18 +129,23 @@ void draw_3d_walls(data_t *data, hitRay_t ray, int ray_num);
 void clear_screen(data_t *data);
 
 // =========	parsing map functions	=========
-void init_data(t_data_maps *data);
-int read_map(int fd, char *fileMap, t_data_maps *data);
-void get_textures(char *line, t_data_maps *data, int *pos);
-int get_color(char *line, t_data_maps *data, int *pos);
-int count_line_map(char *line, int fd);
-void get_map(char *fileMap, t_data_maps *data, int pos, int count);
-int check_errors(t_data_maps *data, t_list *list);
-int check_errors_textures(char **textures);
-int check_errors_colors(t_data_maps *data);
-int check_errors_map(t_data_maps *data, t_list *list);
+void	init_data(t_data_maps *data);
+int		read_map(int fd, char *fileMap, t_data_maps *data);
+void	get_textures(char *line, t_data_maps *data, int *pos);
+int		get_color(char *line, t_data_maps *data, int *pos);
+int		count_line_map(char *line, int fd);
+void	get_map(char *fileMap, t_data_maps *data, int pos, int count);
+int		check_errors(t_data_maps *data, t_list *list);
+int		check_errors_textures(char **textures);
+int		check_errors_colors(t_data_maps *data);
+int		check_errors_map(t_data_maps *data, t_list *list);
+int		loopForMap(char **map, t_corMap *pos, int count);
 
 // ==========	PARSING UTILS FUNCTIONS	==============
-void free_2d_array(char **str);
-t_corMap *init_corMap(char **map);
-int check_intruderInMap(char **map);
+void        free_2d_array(char **str);
+t_corMap	*init_corMap(char **map);
+void		set_dir_init(t_corMap *pos, char c);
+int			check_intruderInMap(char **map);
+
+t_listMap	*newlist(int x, int y);
+int 		lstadd(t_listMap *lst, t_listMap *newnode, char **map, int var);

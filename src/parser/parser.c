@@ -6,7 +6,7 @@
 /*   By: ayakoubi <ayakoubi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 10:53:45 by ayakoubi          #+#    #+#             */
-/*   Updated: 2023/09/14 11:14:29 by ayakoubi         ###   ########.fr       */
+/*   Updated: 2023/09/17 11:36:33 by ayakoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int	read_map(int fd, char *fileMap, t_data_maps *data)
 {
 	char *line;
 	int pos;
-	int count;
 
 	pos = 0;
-	count = 0;
 	while(1)
 	{
 		line = get_next_line(fd);
@@ -30,7 +28,7 @@ int	read_map(int fd, char *fileMap, t_data_maps *data)
 		}
 		if (pos >= 6)
 		{
-			count = count_line_map(line, fd);
+			data->count = count_line_map(line, fd);
 			break;
 		}
 		get_textures(line, data, &pos);
@@ -40,7 +38,7 @@ int	read_map(int fd, char *fileMap, t_data_maps *data)
 	}
 	close(fd);
 	if (pos >= 6)
-		get_map(fileMap, data, pos, count);
+		get_map(fileMap, data, pos, data->count);
 	return (TRUE);
 }
 

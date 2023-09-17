@@ -6,7 +6,7 @@
 /*   By: ayakoubi <ayakoubi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:10:27 by ayakoubi          #+#    #+#             */
-/*   Updated: 2023/09/14 09:56:23 by ayakoubi         ###   ########.fr       */
+/*   Updated: 2023/09/17 11:15:23 by ayakoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void init_data(t_data_maps *data)
 		data->C[i] = -1;
 	}
 	data->map = NULL;
+	data->count = 0;
 }
 
