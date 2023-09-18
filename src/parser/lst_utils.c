@@ -6,7 +6,7 @@
 /*   By: ayakoubi <ayakoubi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 10:08:53 by ayakoubi          #+#    #+#             */
-/*   Updated: 2023/09/17 10:08:56 by ayakoubi         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:22:58 by ayakoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,7 @@ int	lstadd(t_listMap *lst, t_listMap *newnode, char	**map, int var)
 		return (TRUE);
 	}
 	if (var == -1 && map[newnode->y][newnode->x] != '1' && map[newnode->y][newnode->x] != '0')
-	{
-		printf("%d, %d, %c\n", newnode->y, newnode->x, map[newnode->y][newnode->x]);
 		return (FALSE);
-	}
-	//printf("%d, %d, %c\n", tmp->y, tmp->x, map[tmp->y][tmp->x]);
 	tmp->next = newnode;
 	return (TRUE);
 }

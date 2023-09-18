@@ -6,7 +6,7 @@
 /*   By: ayakoubi <ayakoubi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 07:30:15 by ylabrahm          #+#    #+#             */
-/*   Updated: 2023/09/17 10:31:08 by ayakoubi         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:10:27 by ayakoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ int main(int ac, char **av)
 	int fd = open(av[1], O_RDONLY);
 	if (read_map(fd, av[1], &data_map) == FALSE)
 		return (printf("ERROR\n"), 1);
+	int i = -1;
+	while (data_map.map[++i])
+		printf("%s",data_map.map[i]);
+	printf("conunt == > %d\n", data_map.count);
 	if (check_errors(&data_map, &list) == FALSE)
 		return (printf("ERROR\n"), 1);
 	data = malloc(sizeof(data_t));

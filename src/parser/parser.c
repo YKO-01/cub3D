@@ -6,7 +6,7 @@
 /*   By: ayakoubi <ayakoubi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 10:53:45 by ayakoubi          #+#    #+#             */
-/*   Updated: 2023/09/17 11:36:33 by ayakoubi         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:13:51 by ayakoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void	get_map(char *fileMap, t_data_maps *data, int pos, int count)
 		if (!line)
 			break;
 		tmp = ft_strtrim(line, "\n");
-		if (ft_strlen(tmp) || (!ft_strlen(line) && i != 0))
+		if (ft_strlen(tmp) || (ft_strlen(line) && i != 0))
 			data->map[i++] = ft_strdup(line);
 		free(line);
 		free(tmp);

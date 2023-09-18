@@ -6,7 +6,7 @@
 /*   By: ayakoubi <ayakoubi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 10:53:24 by ayakoubi          #+#    #+#             */
-/*   Updated: 2023/09/17 13:50:02 by ayakoubi         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:30:20 by ayakoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int check_errors_map(t_data_maps *data, t_list *list)
 	(void) list;
 	t_corMap *posStart;
 
-	if (check_intruderInMap(data->map) == FALSE)
-		return (FALSE);
 	posStart = init_corMap(data->map);
 	if (posStart == FALSE)
+		return (FALSE);
+	if (check_intruderInMap(data->map) == FALSE)
 		return (FALSE);
 	data->posplayer = posStart;
 	if (loopForMap(data->map, posStart, data->count) == FALSE)
@@ -82,79 +82,65 @@ int check_errors_map(t_data_maps *data, t_list *list)
 
 int loopForMap(char **map, t_corMap *pos, int count)
 {
-	t_listMap *cur;
-	t_listMap *first;
-	int	var;
-	// int i;
-	// int j;
+	// t_listMap *cur;
+	// t_listMap *first;
+	// int	var;
+	int i;
+	int j;
 
-	// i = -1;
-	var = 0;
-	first = newlist(pos->x, pos->y);
-	cur = first;
-	t_listMap *tmp;
-	while (cur)
+	i = -1;
+	// var = 0;
+	// first = newlist(pos->x, pos->y);
+	// cur = first;
+	// t_listMap *tmp;
+	while (map[++i])
 	{
-		// j = -1;
-		// while (map[i][++j])
-		// {
-		// 	if (map[i][j] == '0')
-		// 	{
-		// 		if (i == 0 || j == 0 || i == count - 1 || j == ft_strlen(map[i]) - 2)
-		// 			return (FALSE);
-		// 		if (map[i][j + 1] !=)
-		// 	}
-		// }
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == '0')
+			{
+				if (i == 0 || j == 0 || i == count - 1 || j == ft_strlen(map[i]) - 2)
+					return (FALSE);
+				if (j > ft_strlen(map[i + 1]) || j > ft_strlen(map[i - 1]))
+					return (FALSE);
+			}
+		}
 		
-		var = 0;
-		//printf("************=========>%d, %d  %c\n", cur->y, cur->x, map[cur->y][cur->x]);
-		if (map[cur->y][cur->x] == '0')
-		{
-			var = -1;
-			if (cur->y == 0 || cur->x == 0 || cur->y == count - 1 || cur->x == ft_strlen(map[cur->y]) - 2)
-		 			return (FALSE);
-			if ((map[cur->y + 1] && ft_strlen(map[cur->y + 1]) < cur->x) || ft_strlen(map[cur->y - 1]) < cur->x)
-				return (FALSE);
-			if (lstadd(first, newlist(cur->x + 1, cur->y), map, var) == FALSE)
-				return (FALSE);
-			if (lstadd(first, newlist(cur->x - 1, cur->y), map, var) == FALSE)
-				return (FALSE);
-			if (lstadd(first, newlist(cur->x, cur->y + 1), map, var) == FALSE)
-				return (FALSE);
-			if (lstadd(first, newlist(cur->x, cur->y - 1), map, var) == FALSE)
-				return (FALSE);
-		}
-		else
-		{
-			if (cur->x < ft_strlen(map[cur->y] - 2) && 
-				(map[cur->y][cur->x + 1] == '1' || map[cur->y][cur->x + 1] == '0'))
-					lstadd(first, newlist(cur->x + 1, cur->y), map, var);
-			if (cur->x > 0 && (map[cur->y][cur->x - 1] == '1'
-				|| map[cur->y][cur->x - 1] == '0'))
-					lstadd(first, newlist(cur->x - 1, cur->y), map,var);
-			if ((cur->y < count - 1 && map[cur->y + 1] && ft_strlen(map[cur->y + 1]) >= cur->x) && (map[cur->y + 1][cur->x] == '1'
-				|| map[cur->y + 1][cur->x] == '0'))
-					lstadd(first, newlist(cur->x, cur->y + 1), map, var);
-			if (cur->y < 0 && ft_strlen(map[cur->y - 1]) >= cur->x && (map[cur->y - 1][cur->x] == '1'
-				|| map[cur->y - 1][cur->x] == '0'))
-					lstadd(first, newlist(cur->x, cur->y - 1), map, var);
-		}
-		// printf("after ==================\n%d, %d  %c\n", cur->y, cur->x, map[cur->y][cur->x]);
-		// tmp = first;
-		// printf("==================\n");
-		// while (tmp)
+		// var = 0;
+		// if (map[cur->y][cur->x] == '0')
 		// {
-		// 	printf("%d , %d  === > %c\n", tmp->y, tmp->x, map[tmp->y][tmp->x]);
-		// 	tmp = tmp->next;
+		// 	var = -1;
+		// 	if (cur->y == 0 || cur->x == 0 || cur->y == count - 1 || cur->x == ft_strlen(map[cur->y]) - 2)
+		//  			return (FALSE);
+		// 	if ((map[cur->y + 1] && ft_strlen(map[cur->y + 1]) < cur->x) || ft_strlen(map[cur->y - 1]) < cur->x)
+		// 		return (FALSE);
+		// 	if (lstadd(first, newlist(cur->x + 1, cur->y), map, var) == FALSE)
+		// 		return (FALSE);
+		// 	if (lstadd(first, newlist(cur->x - 1, cur->y), map, var) == FALSE)
+		// 		return (FALSE);
+		// 	if (lstadd(first, newlist(cur->x, cur->y + 1), map, var) == FALSE)
+		// 		return (FALSE);
+		// 	if (lstadd(first, newlist(cur->x, cur->y - 1), map, var) == FALSE)
+		// 		return (FALSE);
 		// }
-		cur = cur->next;
+		// else
+		// {
+		// 	if (cur->x < ft_strlen(map[cur->y] - 2) && 
+		// 		(map[cur->y][cur->x + 1] == '1' || map[cur->y][cur->x + 1] == '0'))
+		// 			lstadd(first, newlist(cur->x + 1, cur->y), map, var);
+		// 	if (cur->x > 0 && (map[cur->y][cur->x - 1] == '1'
+		// 		|| map[cur->y][cur->x - 1] == '0'))
+		// 			lstadd(first, newlist(cur->x - 1, cur->y), map,var);
+		// 	if ((cur->y < count - 1 && map[cur->y + 1] && ft_strlen(map[cur->y + 1]) >= cur->x) && (map[cur->y + 1][cur->x] == '1'
+		// 		|| map[cur->y + 1][cur->x] == '0'))
+		// 			lstadd(first, newlist(cur->x, cur->y + 1), map, var);
+		// 	if (cur->y < 0 && ft_strlen(map[cur->y - 1]) >= cur->x && (map[cur->y - 1][cur->x] == '1'
+		// 		|| map[cur->y - 1][cur->x] == '0'))
+		// 			lstadd(first, newlist(cur->x, cur->y - 1), map, var);
+		// }
+		// cur = cur->next;
 
 	}
-	// tmp = first;
-	// while (tmp)
-	// {
-	// 	printf("%d , %d  === > %c\n", tmp->y, tmp->x, map[tmp->y][tmp->x]);
-	// 	tmp = tmp->next;
-	// }
 	return (TRUE);
 }

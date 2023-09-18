@@ -6,7 +6,7 @@
 /*   By: ayakoubi <ayakoubi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 12:37:51 by ayakoubi          #+#    #+#             */
-/*   Updated: 2023/09/17 10:37:10 by ayakoubi         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:23:56 by ayakoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int check_intruderInMap(char **map)
 	int k;
 	char	*c;
 
-	c = (char [9]) {'N', 'S', 'E', 'W', ' ', '\n', '1', '0', '\t'};
+	c = (char [5]) {' ', '\n', '1', '0', '\t'};
 	i = -1;
 	while (map[++i])
 	{
@@ -79,7 +79,7 @@ int check_intruderInMap(char **map)
 		while (map[i][++j])
 		{
 			k = -1;
-			while (++k < 9)
+			while (++k < 5)
 			{
 			   if (map[i][j] == c[k])
 			   {
